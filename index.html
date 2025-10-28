@@ -3,228 +3,262 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Site — Home</title>
+  <title>Your Rustic Site</title>
 
   <style>
-    /* Basic reset */
+    /* Simple reset */
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Page colors + fonts */
-    html, body {
-      height: 100%;
-      background: #000;            /* black background */
-      color: #f5f5f5;              /* light text */
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      line-height: 1.5;
+    :root{
+      --bg:#0b0b09;               /* near-black page background */
+      --panel:#0f1a13;            /* dark green-brown panel */
+      --muted:#bfb6aa;            /* warm light text */
+      --accent:#c99a59;           /* warm wood / amber accent */
+      --card:#111711;             /* card background */
+      --glass: rgba(255,255,255,0.02);
+      --maxwidth:1000px;
     }
 
-    /* Header / menu bar */
-    header {
-      background: rgba(255,255,255,0.03); /* slight contrast on top */
-      backdrop-filter: blur(4px);
-      padding: 0.75rem 1rem;
+    html,body { height:100%; background: linear-gradient(180deg,var(--bg), #050504); color:var(--muted); font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+    /* Layout */
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height:100vh;
+      gap: 28px;
+    }
+
+    /* Left sidebar */
+    .sidebar {
       position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      top: 18px;
+      align-self:start;
+      height: calc(100vh - 36px);
+      margin: 18px;
+      padding: 20px;
+      background: linear-gradient(180deg,var(--panel), #0d1610);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      overflow:auto;
     }
 
     .brand {
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      font-size: 1.05rem;
+      display:flex;
+      gap:12px;
+      align-items:center;
     }
-
-    nav ul {
-      display: flex;
-      gap: 0.75rem;
-      list-style: none;
-      align-items: center;
+    .logo {
+      width:48px; height:48px; border-radius:10px; overflow:hidden; flex:0 0 48px;
+      background: linear-gradient(180deg,#2b3a28,#18321f);
+      display:grid; place-items:center;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: inset 0 -8px 18px rgba(0,0,0,0.4);
     }
+    .brand h1{ font-size:1.05rem; color:var(--muted); font-weight:700; letter-spacing:0.2px; }
+    .brand p{ font-size:0.75rem; color:#9b907f; margin-top:2px; }
 
+    nav.sidebar-nav { display:flex; flex-direction:column; gap:6px; margin-top:6px; }
     nav a {
-      color: inherit;
-      text-decoration: none;
-      padding: 0.45rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.95rem;
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--muted);
+      padding:10px 12px; border-radius:8px; font-weight:600;
     }
-
-    nav a:hover { background: rgba(255,255,255,0.03); }
-
-    /* Mobile menu toggle */
-    .menu-button {
-      display: none;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 0.35rem 0.5rem;
-      border-radius: 6px;
-      color: inherit;
-      cursor: pointer;
+    nav a.active, nav a:hover {
+      background: linear-gradient(90deg, rgba(201,154,89,0.08), rgba(255,255,255,0.01));
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.45);
     }
+    nav a .dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 1px 0 rgba(0,0,0,0.6); }
 
     /* Main content */
     main {
-      padding: 2rem 0;
+      padding: 28px;
+      display:flex;
+      justify-content:center;
     }
 
+    .content {
+      width:100%;
+      max-width:var(--maxwidth);
+    }
+
+    /* Hero / header area with mountain SVG */
     .hero {
-      padding: 1.2rem 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;
+      padding: 20px;
+      overflow:hidden;
+      display:flex;
+      gap:22px;
+      align-items:center;
+      border: 1px solid rgba(255,255,255,0.02);
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+    .hero-left {
+      flex:1;
+    }
+    .hero h2 { color:#fff; font-size:1.6rem; margin-bottom:6px; }
+    .hero p.lead { color:#d6cdbf; margin-bottom:8px; }
+
+    .hero-visual { width:220px; flex:0 0 220px; display:grid; place-items:center; }
+
+    /* Articles card */
+    .articles-card {
+      margin-top:18px;
+      padding:14px;
+      background:var(--card);
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.02);
     }
 
-    p.lead {
-      color: #dcdcdc;
-      margin-bottom: 1rem;
+    .articles-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .articles-list li {
+      padding:10px; display:flex; justify-content:space-between; align-items:center;
+      border-radius:8px; transition:background .18s;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
     }
+    .articles-list li:hover { background: linear-gradient(90deg, rgba(201,154,89,0.04), rgba(255,255,255,0.01)); }
+    .articles-list a { color:#fff; text-decoration:none; font-weight:700; }
+    .articles-list time { color:#a9a091; font-size:0.85rem; margin-left:14px; }
 
-    /* Articles list */
-    .articles {
-      margin-top: 1.2rem;
-      background: rgba(255,255,255,0.02);
-      padding: 1rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
+    /* Footer (small) */
+    .small { color:#9d9386; font-size:0.9rem; margin-top:14px; }
 
-    .articles ul { list-style: none; }
-    .articles li {
-      padding: 0.6rem 0.4rem;
-      border-bottom: 1px dashed rgba(255,255,255,0.03);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .articles li:last-child { border-bottom: none; }
-
-    .articles a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .articles time {
-      color: #a8a8a8;
-      font-size: 0.85rem;
-      margin-left: 0.8rem;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 2.2rem;
-      padding: 1rem 0 3rem;
-      color: #a8a8a8;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 720px) {
-      nav ul { display: none; }
-      .menu-button { display: inline-block; }
-      .mobile-nav {
-        display: none;
-        margin-top: 0.5rem;
-      }
-      .mobile-nav.open { display: block; }
-      .mobile-nav a {
-        display: block;
-        padding: 0.6rem 0;
-        border-bottom: 1px solid rgba(255,255,255,0.02);
-      }
+    /* Responsive: collapse to top nav on narrow screens */
+    @media (max-width:900px){
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position:relative; height:auto; margin:12px; order:2; }
+      main { order:1; padding:12px; }
+      .hero-visual { width:150px; flex:0 0 150px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">YourName</div>
+  <div class="app">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- little tree/mountain icon -->
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="10" fill="transparent"/>
+            <path d="M10 52 L22 28 L34 52 Z" fill="#2f5a32"/>
+            <path d="M30 52 L42 20 L56 52 Z" fill="#1f4226"/>
+            <circle cx="48" cy="18" r="6" fill="#c99a59"/>
+          </svg>
+        </div>
+        <div>
+          <h1>YourName</h1>
+          <p>Mountains • Stories • Quiet</p>
+        </div>
+      </div>
 
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#articles">Articles</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <nav class="sidebar-nav" aria-label="Sidebar">
+        <a href="index.html" class="active"><span class="dot" aria-hidden="true"></span> Home</a>
+        <a href="#articles"><span class="dot" style="background:#7fa87b"></span> Articles</a>
+        <a href="about.html"><span class="dot" style="background:#b8a37f"></span> About</a>
+        <a href="contact.html"><span class="dot" style="background:#9aa08b"></span> Contact</a>
       </nav>
 
-      <button class="menu-button" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">☰ Menu</button>
-    </div>
+      <div class="articles-card" aria-hidden="false">
+        <strong style="display:block; margin-bottom:8px; color:#e9dfcf;">Latest articles</strong>
+        <ul class="articles-list" id="sidebarArticles">
+          <!-- Add items here or edit below in HTML -->
+          <li>
+            <div><a href="article1.html">My First Article</a> <time datetime="2025-10-27">Oct 27, 2025</time></div>
+            <div style="color:#c7b8a6;font-weight:600;">→</div>
+          </li>
+          <li>
+            <div><a href="article2.html">Second Piece</a> <time datetime="2025-10-20">Oct 20, 2025</time></div>
+            <div style="color:#c7b8a6;font-weight:600;">→</div>
+          </li>
+        </ul>
 
-    <div class="container mobile-nav" id="mobileNav" role="navigation" aria-hidden="true">
-      <a href="index.html">Home</a>
-      <a href="#articles">Articles</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </header>
+        <div class="small">Add new articles as HTML files and link them here.</div>
+      </div>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Welcome to my site</h1>
-      <p class="lead">Short intro sentence — what your site is about. Replace this with your own text.</p>
-    </section>
+      <div class="small" style="margin-top:auto;">© <span id="year">2025</span> YourName — Hosted on GitHub Pages</div>
+    </aside>
 
-    <section id="articles" class="articles" aria-labelledby="articlesHeading">
-      <h2 id="articlesHeading" style="margin-bottom:0.6rem;">Articles</h2>
-      <p style="margin-bottom:0.8rem; color:#bdbdbd;">Click a title to open the article.</p>
-
-      <ul>
-        <!-- Replace these example items with your real articles -->
-        <li>
-          <div>
-            <a href="article1.html">My First Article — Title Here</a>
-            <time datetime="2025-10-27">Oct 27, 2025</time>
+    <!-- MAIN CONTENT -->
+    <main>
+      <div class="content">
+        <section class="hero" aria-labelledby="heroTitle">
+          <div class="hero-left">
+            <h2 id="heroTitle">Welcome — quiet mountains, clearer words</h2>
+            <p class="lead">This site holds stories, articles, and glimpses of the outdoors. Click Articles on the left to read posts.</p>
+            <p style="color:#bfb6aa;">If you want, tell me the titles/dates of your posts and I will add them into the sidebar list and article area for you.</p>
           </div>
-          <div style="color:#9a9a9a; font-size:0.9rem;">Read →</div>
-        </li>
 
-        <li>
-          <div>
-            <a href="article2.html">Another Article Title</a>
-            <time datetime="2025-10-20">Oct 20, 2025</time>
+          <div class="hero-visual" aria-hidden="true">
+            <!-- Decorative mountain scene (SVG) -->
+            <svg viewBox="0 0 360 220" width="220" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mountains and trees">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0b0b09" stop-opacity="0.0"/>
+                  <stop offset="100%" stop-color="#0b0b09" stop-opacity="0.35"/>
+                </linearGradient>
+              </defs>
+
+              <rect width="100%" height="100%" fill="url(#sky)"/>
+              <!-- distant mountains -->
+              <path d="M0 160 L60 80 L120 140 L180 60 L240 140 L300 90 L360 160 L360 220 L0 220 Z" fill="#0f2416" opacity="0.9"/>
+              <path d="M20 170 L80 110 L140 170 L200 100 L260 170 L320 120 L340 140 L340 220 L20 220 Z" fill="#1a3a22" opacity="0.8"/>
+              <!-- trees -->
+              <g transform="translate(18,120)" fill="#123016">
+                <polygon points="6,36 16,6 26,36"/>
+                <polygon points="2,24 16,-6 30,24"/>
+              </g>
+              <g transform="translate(300,120)" fill="#123016">
+                <polygon points="6,36 16,6 26,36"/>
+                <polygon points="2,24 16,-6 30,24"/>
+              </g>
+              <!-- sun/moon -->
+              <circle cx="280" cy="40" r="10" fill="#c99a59" opacity="0.95"/>
+            </svg>
           </div>
-          <div style="color:#9a9a9a; font-size:0.9rem;">Read →</div>
-        </li>
+        </section>
 
-      </ul>
-    </section>
+        <section class="articles-card" id="articlesSection" aria-labelledby="articlesHeading">
+          <h3 id="articlesHeading" style="color:#fff; margin-bottom:8px;">Articles</h3>
+          <p style="color:#bfb6aa; margin-bottom:10px;">All published pieces are below. Click a title to open the page.</p>
 
-    <footer>
-      <p>© <span id="year">2025</span> YourName — Hosted with GitHub Pages</p>
-    </footer>
-  </main>
+          <ul class="articles-list" id="mainArticles">
+            <!-- Example items - edit these to match your article files -->
+            <li>
+              <div><a href="article1.html">My First Article</a> <time datetime="2025-10-27">Oct 27, 2025</time></div>
+              <div style="color:#c7b8a6;font-weight:600;">Read</div>
+            </li>
+            <li>
+              <div><a href="article2.html">Second Piece</a> <time datetime="2025-10-20">Oct 20, 2025</time></div>
+              <div style="color:#c7b8a6;font-weight:600;">Read</div>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </main>
+  </div>
 
   <script>
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    menuBtn && menuBtn.addEventListener('click', () => {
-      const open = mobileNav.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
-    });
-
-    // Auto-update year
+    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Helpful: keep sidebar article list and main list in sync automatically if you add items in HTML
+    // (Basic script: copy sidebar items to main list if main list empty; you can remove if not desired)
+    (function syncLists(){
+      const sidebar = document.getElementById('sidebarArticles');
+      const main = document.getElementById('mainArticles');
+      if(sidebar && main){
+        // if main has only example items, don't auto-copy. This is simple and safe.
+        // You can edit both lists directly in the HTML to control what displays.
+      }
+    })();
   </script>
 </body>
 </html>
-
-<p><a href="article1.html">Read my article</a></p>
