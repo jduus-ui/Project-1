@@ -3,12 +3,228 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Welcome — My GitHub Pages Site</title>
+  <title>Your Site — Home</title>
+
+  <style>
+    /* Basic reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Page colors + fonts */
+    html, body {
+      height: 100%;
+      background: #000;            /* black background */
+      color: #f5f5f5;              /* light text */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    /* Header / menu bar */
+    header {
+      background: rgba(255,255,255,0.03); /* slight contrast on top */
+      backdrop-filter: blur(4px);
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      font-size: 1.05rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 0.75rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    nav a {
+      color: inherit;
+      text-decoration: none;
+      padding: 0.45rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover { background: rgba(255,255,255,0.03); }
+
+    /* Mobile menu toggle */
+    .menu-button {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* Main content */
+    main {
+      padding: 2rem 0;
+    }
+
+    .hero {
+      padding: 1.2rem 0;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.lead {
+      color: #dcdcdc;
+      margin-bottom: 1rem;
+    }
+
+    /* Articles list */
+    .articles {
+      margin-top: 1.2rem;
+      background: rgba(255,255,255,0.02);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .articles ul { list-style: none; }
+    .articles li {
+      padding: 0.6rem 0.4rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .articles li:last-child { border-bottom: none; }
+
+    .articles a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .articles time {
+      color: #a8a8a8;
+      font-size: 0.85rem;
+      margin-left: 0.8rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 2.2rem;
+      padding: 1rem 0 3rem;
+      color: #a8a8a8;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      nav ul { display: none; }
+      .menu-button { display: inline-block; }
+      .mobile-nav {
+        display: none;
+        margin-top: 0.5rem;
+      }
+      .mobile-nav.open { display: block; }
+      .mobile-nav a {
+        display: block;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.02);
+      }
+    }
+  </style>
 </head>
-<body style="font-family: system-ui, Arial, sans-serif; max-width:800px; margin:2rem auto; padding:1rem;">
-  <h1>Hello — my GitHub Pages site</h1>
-  <p>This is a simple site hosted on GitHub Pages. Edit <code>index.html</code> in the repo to change this text.</p>
-  <p>Want me to customize this for you? Ask and I’ll make it.</p>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">YourName</div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-button" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">☰ Menu</button>
+    </div>
+
+    <div class="container mobile-nav" id="mobileNav" role="navigation" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="#articles">Articles</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Welcome to my site</h1>
+      <p class="lead">Short intro sentence — what your site is about. Replace this with your own text.</p>
+    </section>
+
+    <section id="articles" class="articles" aria-labelledby="articlesHeading">
+      <h2 id="articlesHeading" style="margin-bottom:0.6rem;">Articles</h2>
+      <p style="margin-bottom:0.8rem; color:#bdbdbd;">Click a title to open the article.</p>
+
+      <ul>
+        <!-- Replace these example items with your real articles -->
+        <li>
+          <div>
+            <a href="article1.html">My First Article — Title Here</a>
+            <time datetime="2025-10-27">Oct 27, 2025</time>
+          </div>
+          <div style="color:#9a9a9a; font-size:0.9rem;">Read →</div>
+        </li>
+
+        <li>
+          <div>
+            <a href="article2.html">Another Article Title</a>
+            <time datetime="2025-10-20">Oct 20, 2025</time>
+          </div>
+          <div style="color:#9a9a9a; font-size:0.9rem;">Read →</div>
+        </li>
+
+      </ul>
+    </section>
+
+    <footer>
+      <p>© <span id="year">2025</span> YourName — Hosted with GitHub Pages</p>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn && menuBtn.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+
+    // Auto-update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
 <p><a href="article1.html">Read my article</a></p>
